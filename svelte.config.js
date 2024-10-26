@@ -46,25 +46,21 @@ if (typeof CONFIG_READTIME == "undefined") {
         x.properties.status.select.name == "Public"
     );
     await writeFile("./.build/pages.json", JSON.stringify(pages));
-    await writeFile(
-      "./.build/search.json",
-      JSON.stringify(
-        pages.map((x) => {
-          return {
-            slug: x.properties.slug.rich_text[0].plain_text,
-            title: x.properties.title.title[0].plain_text,
-            date: x.properties.date.date.start,
-            category:
-              "select" in x.properties.category &&
-              x.properties.category.select != null &&
-              "name" in x.properties.category.select
-                ? x.properties.category.select.name
-                : "Uncategorized",
-          };
-        })
-      )
-    );
-    if (process.env.IS_VERCEL === "true") await redis.set("search", pages);
+    const sch = pages.map((x) => {
+      return {
+        slug: x.properties.slug.rich_text[0].plain_text,
+        title: x.properties.title.title[0].plain_text,
+        date: x.properties.date.date.start,
+        category:
+          "select" in x.properties.category &&
+          x.properties.category.select != null &&
+          "name" in x.properties.category.select
+            ? x.properties.category.select.name
+            : "Uncategorized",
+      };
+    });
+    await writeFile("./.build/search.json", JSON.stringify(sch));
+    if (process.env.IS_VERCEL === "true") await redis.set("search", sch);
 
     console.log("Got", pages.length, "pages");
 
