@@ -13,7 +13,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const pages =
     process.env.IS_VERCEL === "true"
-      ? JSON.parse((await redis.get("search")) || "[]")
+      ? (await redis.get("search")) || []
       : JSON.parse(await readFile("./.build/search.json", "utf-8"));
   const posts = pages.slice(OFFSET, OFFSET + LIMIT);
 

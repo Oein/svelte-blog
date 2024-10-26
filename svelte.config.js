@@ -64,8 +64,7 @@ if (typeof CONFIG_READTIME == "undefined") {
         })
       )
     );
-    if (process.env.IS_VERCEL === "true")
-      await redis.set("search", JSON.stringify(pages));
+    if (process.env.IS_VERCEL === "true") await redis.set("search", pages);
 
     console.log("Got", pages.length, "pages");
 
@@ -80,8 +79,7 @@ if (typeof CONFIG_READTIME == "undefined") {
         const hash = crypto.createHash("md5").update(btoa(slug)).digest("hex");
         const recordMap = await getSpecificPage(page.id);
         await writeFile(`./.build/${hash}.json`, JSON.stringify(recordMap));
-        if (process.env.IS_VERCEL === "true")
-          await redis.set(hash, JSON.stringify(recordMap));
+        if (process.env.IS_VERCEL === "true") await redis.set(hash, recordMap);
       } catch (e) {
         console.error("Error fetching page", page.id, e);
       }
