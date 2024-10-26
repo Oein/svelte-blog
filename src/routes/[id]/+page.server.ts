@@ -13,9 +13,8 @@ const load: import("./$types").PageServerLoad = async function ({ params }) {
     const data = await redis.get(hash);
     if (!data) return error(404, "Not found");
     return {
-      data: JSON.parse(data as string),
+      data,
     };
-    return;
   }
   if (!existsSync(`./.build/${hash}.json`)) return error(404, "Not found");
   const data = JSON.parse(await readFile(`./.build/${hash}.json`, "utf-8"));
