@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+  --color-bg: #0c0d14;
+  --color-bg-layer1: #1b1d25;
+  --color-bg-layer2: #171921;
+  --color-bg-layer3: #2f3548;
+  --color-accent-1: #9ba9ed;
+  --color-accent-1-hover: #292c40;
+  --color-accent-2: #2f3548;
+  --color-accent-2-hover: #3c4158;
+  --color-fg: #ffffffe6;
+
+  --page-width: 75rem;
+
+  --notion-fore-default: var(--color-fg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  padding: 0px;
+  margin: 0px;
+
+  font-family: Roboto, sans-serif, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.notion-toggle-inner {
+  color: #fff;
+}
+
+.notion-toggle-inner:hover {
+  background: var(--color-accent-2-hover) !important;
+}
