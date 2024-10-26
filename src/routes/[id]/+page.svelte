@@ -48,6 +48,14 @@
     </div>
   </div>
 
+  {#if data.data.page.properties.thumbnail.files.length > 0}
+    <img
+      src={data.data.page.properties.thumbnail.files[0].file.url}
+      alt="thumbnail"
+      class="thumbnail"
+    />
+  {/if}
+
   <Notion blocks={data.data.blocks} />
 </article>
 
@@ -58,6 +66,12 @@
     background: var(--color-bg-layer1);
     border-radius: 1rem;
     padding: 1.5rem 1.5rem 1rem 1.5rem;
+  }
+
+  .thumbnail {
+    width: 100%;
+    border-radius: 1rem;
+    margin: 0.75rem 0px;
   }
 
   .title {

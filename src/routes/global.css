@@ -16,6 +16,18 @@
   --notion-fore-default: var(--color-fg);
 }
 
+.notion-table-colored {
+  background-color: var(--color-accent-2) !important;
+}
+
+.notion-table-cell-wrp {
+  border-color: var(--color-accent-1-hover) !important;
+}
+
+.notion-debug {
+  color: #000;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-fg);
