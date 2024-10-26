@@ -10,6 +10,9 @@ import "dotenv/config";
 import { getGlobalPageData, getSpecificPage } from "./genGlobalPageData.js";
 import crypto from "crypto";
 
+import { Redis } from "@upstash/redis";
+const redis = Redis.fromEnv();
+
 if (!existsSync("./.build")) {
   await mkdir("./.build");
 }
@@ -61,6 +64,8 @@ if (typeof CONFIG_READTIME == "undefined") {
         })
       )
     );
+    if (process.env.IS_VERCEL === "true")
+      await redis.set("search", JSON.stringify(pages));
 
     console.log("Got", pages.length, "pages");
 
@@ -75,6 +80,8 @@ if (typeof CONFIG_READTIME == "undefined") {
         const hash = crypto.createHash("md5").update(btoa(slug)).digest("hex");
         const recordMap = await getSpecificPage(page.id);
         await writeFile(`./.build/${hash}.json`, JSON.stringify(recordMap));
+        if (process.env.IS_VERCEL === "true")
+          await redis.set(hash, JSON.stringify(recordMap));
       } catch (e) {
         console.error("Error fetching page", page.id, e);
       }
