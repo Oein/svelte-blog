@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-static";
+import adapter from "@sveltejs/adapter-auto";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 import { writeFile, mkdir, readFile } from "node:fs/promises";
@@ -88,8 +88,6 @@ const pages = existsSync("./.build/pages.json")
 const paths = pages.map(
   (page) => "/" + page.properties.slug.rich_text[0].plain_text
 );
-
-console.log("Paths", paths);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
