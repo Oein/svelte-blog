@@ -28,6 +28,21 @@
   color: #000;
 }
 
+.notion-render.notion-link {
+  word-break: break-all;
+
+  background: rgba(120, 131, 135, 0.15);
+  color: var(--color-accent-1) !important;
+  font-size: 85%;
+  padding: 0.2em 0.4em;
+  text-decoration: none;
+  border-radius: 0.2em;
+}
+
+.notion-render.notion-link > * {
+  color: inherit !important;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-fg);

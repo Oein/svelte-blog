@@ -28,7 +28,7 @@
     "htmlparser": "^1.7.7",
     "notion-utils": "^6.16.0",
     "soupselect": "^0.2.0",
-    "svelte-notion-x": "1.0.6"
+    "svelte-notion-x": "^1.0.8"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

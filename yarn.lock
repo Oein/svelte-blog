@@ -2648,10 +2648,10 @@ svelte-hmr@^0.16.0:
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.16.0.tgz#9f345b7d1c1662f1613747ed7e82507e376c1716"
   integrity sha512-Gyc7cOS3VJzLlfj7wKS0ZnzDVdv3Pn2IuVeJPk9m2skfhcu5bq3wtIZyQGggr7/Iim5rH5cncyQft/kRLupcnA==
 
-svelte-notion-x@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/svelte-notion-x/-/svelte-notion-x-1.0.5.tgz#4e91f33489c4385b32d284e7d3e1c3e18d2660d5"
-  integrity sha512-aHtqQW1F5uRySEiKeL6u4IPLPcMJGiXgNKnvm1U+R4bV9KLHMq41JIaFusuScaV1WPXLQDvWgVbGcIkKvGSFvQ==
+svelte-notion-x@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/svelte-notion-x/-/svelte-notion-x-1.0.8.tgz#da84e2b79a5776f73ea5c5e03687cdd4ca152977"
+  integrity sha512-7EhOTKfphQApsXxfs3ZdV+AaVI7Mk+05LL++TquE5+hHMgGgh8gFxDKYDr+Caq55jOfvad/NZpb+AmVOxvwAMg==
   dependencies:
     highlight.js "^11.10.0"
     mermaid "^11.3.0"
