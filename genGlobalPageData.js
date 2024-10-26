@@ -92,7 +92,6 @@ const rateWait = async () => {
 };
 
 const client = new Client({ auth: process.env.NOTION_API_KEY });
-console.log(process.env.NOTION_API_KEY, process.env.NOTION_DB_ID);
 
 const BlockDatabase = {
   slug_property: "Type",
