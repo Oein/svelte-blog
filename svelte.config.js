@@ -10,6 +10,10 @@ import "dotenv/config";
 import { getGlobalPageData, getSpecificPage } from "./genGlobalPageData.js";
 import crypto from "crypto";
 
+if (!existsSync("./.build")) {
+  await mkdir("./.build");
+}
+
 const CONFIG_READTIME = process.env.GT;
 if (typeof CONFIG_READTIME == "undefined") {
   console.warn("CONFIG_READTIME(process.env.GT) is not defined");
@@ -22,10 +26,6 @@ if (typeof CONFIG_READTIME == "undefined") {
   })();
 
   await writeFile("./.build/last_config_readtime", CONFIG_READTIME);
-
-  if (!existsSync("./.build")) {
-    await mkdir("./.build");
-  }
 
   if (
     (!existsSync("./.build/pages.json") ||
