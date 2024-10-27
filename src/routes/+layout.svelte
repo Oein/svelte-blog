@@ -4,11 +4,8 @@
   import "svelte-notion-x/dist/style/notion.css";
   import "./global.css";
 
-  import { fade, slide } from "svelte/transition";
-
   let scrollY = 0;
-  let innerHeight = 0;
-  $: console.log(scrollY);
+  let innerHeight = 1080;
 
   export let data;
 
