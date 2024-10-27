@@ -15,5 +15,8 @@
    Vercel > Your Project > Storage > Add New > Upstash > KV Storage
 
 8. Get Deploy Hooks URL from vercel
+
+   Vercel > Your Poject > Settings > Git > Deploy Hooks
+
 9. Go to Repo > Settings > Secrets and variables > Actions > Variables
 10. Add VERCEL_WEBHOOK_URL as `Step 8`
