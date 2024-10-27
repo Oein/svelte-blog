@@ -21,7 +21,8 @@
     if (loading) return;
     loading = true;
     lastFetched++;
-    if ((window as any).postCache[lastFetched]) {
+    if (typeof (window as any).postCache[lastFetched] != "undefined") {
+      console.log("cache hit", lastFetched);
       posts = [...posts, ...(window as any).postCache[lastFetched]];
       hasMore = true;
       loading = false;
