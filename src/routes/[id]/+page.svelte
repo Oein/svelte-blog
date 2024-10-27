@@ -7,6 +7,28 @@
 
   onMount(() => {
     utterancesTheme.set("dark-blue");
+
+    if (typeof window == "undefined") return;
+
+    let inter = setInterval(() => {
+      try {
+        /** @type {HTMLIFrameElement}*/
+        const iFrame = document.getElementsByClassName("utterances-frame")[0];
+        if (iFrame && iFrame instanceof HTMLIFrameElement) {
+          iFrame.contentWindow?.postMessage(
+            { type: "set-theme", theme: "dark-blue" },
+            "https://utteranc.es"
+          );
+        }
+      } catch (e) {
+        // iFrame is not loaded yet!
+        console.log("error", e);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(inter);
+    };
   });
 
   const toNotionImageUrl = (url: string, blockId: string) =>
