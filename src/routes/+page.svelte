@@ -20,8 +20,16 @@
     if (loading) return;
     loading = true;
     lastFetched++;
+    if ((window as any).postCache[lastFetched]) {
+      posts = [...posts, ...(window as any).postCache[lastFetched]];
+      hasMore = true;
+      loading = false;
+      lastFetched++;
+      return;
+    }
     const response = await fetch("/api/posts?page=" + lastFetched);
     const res = await response.json();
+    (window as any).postCache[lastFetched] = res.posts;
     posts = [...posts, ...res.posts];
     hasMore = res.hasMore;
     loading = false;
@@ -29,6 +37,7 @@
 
   onMount(() => {
     if (typeof window == "undefined") return;
+    (window as any).postCache = {};
     fetchPosts();
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore) {
@@ -42,6 +51,10 @@
     };
   });
 </script>
+
+<svelte:head>
+  <title>Oein's Story</title>
+</svelte:head>
 
 <div class="posts">
   {#each posts as post}

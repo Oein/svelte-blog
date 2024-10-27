@@ -10,6 +10,12 @@
     >
     <div>Oein's Story</div>
   </a>
+
+  <div>
+    <a href="/about" class="bookmarks">
+      <div>소개</div>
+    </a>
+  </div>
 </header>
 
 <style>
@@ -90,5 +96,11 @@
     margin-bottom: 0.25rem;
 
     display: block;
+  }
+
+  .bookmarks {
+    height: fit-content;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 </style>

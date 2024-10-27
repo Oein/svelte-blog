@@ -1,7 +1,25 @@
 <script lang="ts">
   export let data: import("./$types").PageData;
   import Notion from "svelte-notion-x";
+
+  import { Utterances, utterancesTheme } from "@codewithshin/svelte-utterances";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    utterancesTheme.set("dark-blue");
+  });
+
+  const toNotionImageUrl = (url: string, blockId: string) =>
+    `https://notion.so${
+      url.startsWith("/image")
+        ? url
+        : `/image/${encodeURIComponent(url)}?table=block&id=${blockId}`
+    }`;
 </script>
+
+<svelte:head>
+  <title>{data.data.page.properties.title.title[0].plain_text}</title>
+</svelte:head>
 
 <article>
   <div class="title">{data.data.page.properties.title.title[0].plain_text}</div>
@@ -50,13 +68,19 @@
 
   {#if data.data.page.properties.thumbnail.files.length > 0}
     <img
-      src={data.data.page.properties.thumbnail.files[0].file.url}
+      src={toNotionImageUrl(
+        data.data.page.properties.thumbnail.files[0].file.url,
+        data.data.page.id
+      )}
       alt="thumbnail"
       class="thumbnail"
     />
   {/if}
 
   <Notion blocks={data.data.blocks} />
+
+  <!-- @ts-ignore -->
+  <Utterances reponame="Oein/svelte-blog" theme="dark-blue" />
 </article>
 
 <style>

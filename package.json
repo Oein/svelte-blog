@@ -21,6 +21,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@codewithshin/svelte-utterances": "^0.2.4",
     "@notionhq/client": "^2.2.15",
     "@sveltejs/adapter-static": "^3.0.5",
     "@ungap/structured-clone": "^1.2.0",

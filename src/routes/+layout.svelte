@@ -3,25 +3,115 @@
   import Profile from "./components/Profile.svelte";
   import "svelte-notion-x/dist/style/notion.css";
   import "./global.css";
+
+  import { fade, slide } from "svelte/transition";
+
+  let scrollY = 0;
+  let innerHeight = 0;
+  $: console.log(scrollY);
+
+  export let data;
+
+  function fadeAndSlide(node: any) {
+    return {
+      duration: 200,
+      css: (t: number, u: any) => {
+        return `
+          transform: translateY(${(1 - t) * 0.5}rem);
+          opacity: ${t};
+        `;
+      },
+    };
+  }
+
+  function fadeAndSlideIn(node: any) {
+    return {
+      duration: 200,
+      delay: 200,
+      css: (t: number, u: any) => {
+        return `
+          transform: translateY(${-0.5 + t / 2}rem);
+          opacity: ${t};
+        `;
+      },
+    };
+  }
 </script>
 
+<svelte:window bind:scrollY bind:innerHeight />
+
+<svelte:head>
+  <title>Oein's Story</title>
+</svelte:head>
+
 <Header />
-<img src="/wideBackgroundImage.png" alt="wide view" class="cover_image" />
+<div class="banner">
+  <img
+    src="https://blog.imnyang.xyz/_astro/banner.CjixG8N2_Z2q15O1.webp"
+    alt="wide view"
+    class="cover_image"
+  />
+  <div
+    class={`text ${scrollY > innerHeight * 0.2 + 16 * 1.5 ? "hideText" : ""}`}
+    style={`--innerHeight: ${innerHeight}; --scrollY: ${scrollY};`}
+  >
+    <h1>Oein's Story</h1>
+  </div>
+</div>
 <div class="view">
   <main>
-    <slot />
+    {#key data.pathname}
+      <div in:fadeAndSlideIn out:fadeAndSlide>
+        <slot />
+      </div>
+    {/key}
   </main>
 
   <Profile />
 </div>
 
 <style>
+  .banner {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    user-select: none;
+    position: relative;
+  }
+  .banner > .text {
+    max-width: var(--page-width);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 0px 2rem;
+
+    transition:
+      top,
+      bottom 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .text > h1 {
+    transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --opacity: calc(
+      1 - 1 / (var(--innerHeight) * 0.1 + 16 * 1.5) *
+        (var(--scrollY) - var(--innerHeight) * 0.15)
+    );
+    opacity: var(--opacity);
+  }
   .cover_image {
     width: 100%;
     z-index: -1;
     position: relative;
 
     transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    max-height: 40vh;
+    object-fit: cover;
+    object-position: center;
   }
 
   .view {
@@ -53,8 +143,16 @@
   }
 
   @media (max-width: 75rem) {
-    .cover_image {
+    .cover_image,
+    .banner > .text {
       transform: translateY(calc(4.5rem - 1rem));
+    }
+
+    .text > h1 {
+      --opacity: calc(
+        1 - 1 / (var(--innerHeight) * 0.08) *
+          (var(--scrollY) - var(--innerHeight) * 0.15)
+      );
     }
 
     .view {
