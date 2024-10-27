@@ -83,12 +83,10 @@ if (typeof CONFIG_READTIME == "undefined") {
   }
 }
 
-const pages = existsSync("./.build/pages.json")
-  ? JSON.parse(await readFile("./.build/pages.json", "utf-8"))
+const pages = existsSync("./.build/search.json")
+  ? JSON.parse(await readFile("./.build/search.json", "utf-8"))
   : [];
-const paths = pages.map(
-  (page) => "/" + page.properties.slug.rich_text[0].plain_text
-);
+const paths = pages.map((page) => "/" + page.slug);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
