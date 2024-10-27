@@ -9,15 +9,16 @@
 5. !! Create A page that has `about` slug, and `public` status
 6. Link your database to your api [Notoin docs / give your integration page permissions](https://developers.notion.com/docs/create-a-notion-integration#give-your-integration-page-permissions)
 7. Setup env key (NOTION_DB_ID, NOTION_API_KEY)
-8. Deploy this repo
+8. Set env `IS_VERCEL` to `true`
+9. Deploy this repo
 
    You need `Vercel upstash-kv` Linked to your project.
    You can link upstash-kv after deploying first time
    Vercel > Your Project > Storage > Add New > Upstash > KV Storage
 
-9. Get Deploy Hooks URL from vercel
+10. Get Deploy Hooks URL from vercel
 
-   Vercel > Your Poject > Settings > Git > Deploy Hooks
+    Vercel > Your Poject > Settings > Git > Deploy Hooks
 
-10. Go to Repo > Settings > Secrets and variables > Actions > Variables
-11. Add VERCEL_WEBHOOK_URL as `Step 8`
+11. Go to Repo > Settings > Secrets and variables > Actions > Variables
+12. Add VERCEL_WEBHOOK_URL as `Step 8`
