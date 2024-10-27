@@ -5,7 +5,7 @@
   import "./global.css";
 
   let scrollY = 0;
-  let innerHeight = 1080;
+  let imageHeight = 0;
 
   export let data;
 
@@ -35,18 +35,18 @@
   }
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight />
+<svelte:window bind:scrollY />
 
 <svelte:head>
   <title>Oein's Story</title>
 </svelte:head>
 
 <Header />
-<div class="banner">
+<div class="banner" bind:clientHeight={imageHeight}>
   <img src="/wideBackgroundImage.png" alt="wide view" class="cover_image" />
   <div
-    class={`text ${scrollY > innerHeight * 0.2 + 16 * 1.5 ? "hideText" : ""}`}
-    style={`--innerHeight: ${innerHeight}; --scrollY: ${scrollY};`}
+    class={`text`}
+    style={`--innerHeight: ${imageHeight}; --scrollY: ${scrollY};`}
   >
     <h1>Oein's Story</h1>
   </div>
@@ -91,8 +91,8 @@
   .text > h1 {
     transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
     --opacity: calc(
-      1 - 1 / (var(--innerHeight) * 0.1 + 16 * 1.5) *
-        (var(--scrollY) - var(--innerHeight) * 0.15)
+      1 - 1 / (var(--innerHeight) * 0.4) *
+        (var(--scrollY) - var(--innerHeight) * 0.18)
     );
     opacity: var(--opacity);
   }
@@ -142,10 +142,10 @@
     }
 
     .text > h1 {
-      --opacity: calc(
+      /* --opacity: calc(
         1 - 1 / (var(--innerHeight) * 0.08) *
           (var(--scrollY) - var(--innerHeight) * 0.15)
-      );
+      ); */
     }
 
     .view {
