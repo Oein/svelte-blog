@@ -1,9 +1,9 @@
 name: Fetch Latest Data
 
 on:
-  - schedule:
+  schedule:
       - cron: "0 0,12 * * *"
-  - workflow_dispatch
+  workflow_dispatch
 
 jobs:
   deploy:
