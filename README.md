@@ -11,6 +11,7 @@
 7. Deploy this repo
 
    You need `Vercel upstash-kv` Linked to your project.
+   You can link upstash-kv after deploying first time
    Vercel > Your Project > Storage > Add New > Upstash > KV Storage
 
 8. Get Deploy Hooks URL from vercel
