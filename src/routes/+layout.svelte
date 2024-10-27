@@ -166,5 +166,9 @@
 
       transform: translateY(-1rem);
     }
+
+    .banner > .text {
+      bottom: 0.5rem;
+    }
   }
 </style>
