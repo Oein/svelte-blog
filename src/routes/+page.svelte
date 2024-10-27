@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Post from "./components/Post.svelte";
+  import SkeletonPost from "./components/SkeletonPost.svelte";
 
   type TPost = {
     slug: string;
@@ -60,6 +61,13 @@
   {#each posts as post}
     <Post page={post} />
   {/each}
+  {#if loading}
+    <SkeletonPost />
+    <SkeletonPost />
+    <SkeletonPost />
+    <SkeletonPost />
+    <SkeletonPost />
+  {/if}
   <div bind:this={infscroll} />
 </div>
 
