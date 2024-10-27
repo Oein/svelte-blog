@@ -1,3 +1,7 @@
+<script>
+  import { config } from "../config";
+</script>
+
 <header>
   <a href="/" class="main">
     <svg class="home" height="1.75rem" viewBox="0 0 24 24" width="1.75rem"
@@ -8,7 +12,7 @@
         ></path></symbol
       ><use xlink:href="#ai:material-symbols:home-outline-rounded"></use></svg
     >
-    <div>Oein's Story</div>
+    <div>{config.blogName}</div>
   </a>
 
   <div>

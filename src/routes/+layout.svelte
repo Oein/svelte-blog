@@ -3,6 +3,7 @@
   import Profile from "./components/Profile.svelte";
   import "svelte-notion-x/dist/style/notion.css";
   import "./global.css";
+  import { config } from "./config";
 
   let scrollY = 0;
   let imageHeight = 0;
@@ -43,12 +44,12 @@
 
 <Header />
 <div class="banner" bind:clientHeight={imageHeight}>
-  <img src="/wideBackgroundImage.png" alt="wide view" class="cover_image" />
+  <img src={config.bannerImageURL} alt="wide view" class="cover_image" />
   <div
     class={`text`}
     style={`--innerHeight: ${imageHeight}; --scrollY: ${scrollY};`}
   >
-    <h1>Oein's Story</h1>
+    <h1>{config.blogName}</h1>
   </div>
 </div>
 <div class="view">
@@ -140,14 +141,6 @@
     .banner > .text {
       transform: translateY(calc(4.5rem - 1rem));
     }
-
-    .text > h1 {
-      /* --opacity: calc(
-        1 - 1 / (var(--innerHeight) * 0.08) *
-          (var(--scrollY) - var(--innerHeight) * 0.15)
-      ); */
-    }
-
     .view {
       padding-top: calc(4.5rem - 1rem);
     }
