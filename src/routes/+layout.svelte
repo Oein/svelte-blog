@@ -46,11 +46,7 @@
 
 <Header />
 <div class="banner">
-  <img
-    src="https://blog.imnyang.xyz/_astro/banner.CjixG8N2_Z2q15O1.webp"
-    alt="wide view"
-    class="cover_image"
-  />
+  <img src="/wideBackgroundImage.png" alt="wide view" class="cover_image" />
   <div
     class={`text ${scrollY > innerHeight * 0.2 + 16 * 1.5 ? "hideText" : ""}`}
     style={`--innerHeight: ${innerHeight}; --scrollY: ${scrollY};`}

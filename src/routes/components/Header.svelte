@@ -77,9 +77,7 @@
     opacity: 0;
     scale: 0;
 
-    transition:
-      opacity,
-      scale 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
   a:hover::before {

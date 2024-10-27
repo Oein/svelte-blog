@@ -164,10 +164,6 @@
     transition: background 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
 
-  .projects > a:hover {
-    background: var(--color-accent-2);
-  }
-
   .projects > a > svg {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -176,5 +172,32 @@
   .projects > a > div {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .projects > a {
+    position: relative;
+  }
+
+  .projects > a > * {
+    z-index: 2;
+  }
+
+  .projects > a::before {
+    background: var(--color-accent-1-hover);
+    content: "";
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 0.5rem;
+    opacity: 0;
+    scale: 0;
+
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .projects > a:hover::before {
+    opacity: 1;
+    scale: 1;
   }
 </style>
