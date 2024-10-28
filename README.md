@@ -12,11 +12,6 @@
 8. Setup env key (NOTION_DB_ID, NOTION_API_KEY)
 9. Set env `IS_VERCEL` to `true`
 10. Deploy this repo
-
-    You need `Vercel upstash-kv` Linked to your project.
-    You can link upstash-kv after deploying first time
-    Vercel > Your Project > Storage > Add New > Upstash > KV Storage
-
 11. Get Deploy Hooks URL from vercel
 
     Vercel > Your Poject > Settings > Git > Deploy Hooks
