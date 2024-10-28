@@ -1,4 +1,5 @@
 import adapter from "@sveltejs/adapter-auto";
+import adapterStatic from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 import { writeFile, mkdir, readFile } from "node:fs/promises";
@@ -9,9 +10,6 @@ import "dotenv/config";
 // Fetch pages from API
 import { getGlobalPageData, getSpecificPage } from "./genGlobalPageData.js";
 import crypto from "crypto";
-
-import { Redis } from "@upstash/redis";
-const redis = Redis.fromEnv();
 
 if (!existsSync("./.build")) {
   await mkdir("./.build");
@@ -60,7 +58,6 @@ if (typeof CONFIG_READTIME == "undefined") {
       };
     });
     await writeFile("./.build/search.json", JSON.stringify(sch));
-    if (process.env.IS_VERCEL === "true") await redis.set("search", sch);
 
     console.log("Got", pages.length, "pages");
 
@@ -75,7 +72,6 @@ if (typeof CONFIG_READTIME == "undefined") {
         const hash = crypto.createHash("md5").update(btoa(slug)).digest("hex");
         const recordMap = await getSpecificPage(page.id);
         await writeFile(`./.build/${hash}.json`, JSON.stringify(recordMap));
-        if (process.env.IS_VERCEL === "true") await redis.set(hash, recordMap);
       } catch (e) {
         console.error("Error fetching page", page.id, e);
       }
@@ -86,7 +82,12 @@ if (typeof CONFIG_READTIME == "undefined") {
 const pages = existsSync("./.build/search.json")
   ? JSON.parse(await readFile("./.build/search.json", "utf-8"))
   : [];
-const paths = pages.map((page) => "/" + page.slug);
+let paths = pages.map((page) => "/" + page.slug);
+import { config as cfg } from "./src/routes/config.js";
+let idxes = Math.ceil(pages.length / cfg.api.POSTS_PER_PAGE);
+for (let i = 0; i < idxes; i++) {
+  paths.push(`/api/posts/${i + 1}.json`);
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -98,7 +99,7 @@ const config = {
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
     // If your environment is not supported, or you settled on a specific environment, switch out the adapter.
     // See https://kit.svelte.dev/docs/adapters for more information about adapters.
-    adapter: adapter(),
+    adapter: process.env.STATIC === "true" ? adapterStatic() : adapter(),
 
     prerender: {
       crawl: true,

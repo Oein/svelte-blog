@@ -29,7 +29,7 @@
       lastFetched++;
       return;
     }
-    const response = await fetch("/api/posts?page=" + lastFetched);
+    const response = await fetch("/api/posts/" + lastFetched + ".json");
     const res = await response.json();
     (window as any).postCache[lastFetched] = res.posts;
     posts = [...posts, ...res.posts];

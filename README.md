@@ -3,7 +3,7 @@
 ## Settings
 
 1. Use This Repo as template
-2. Customize `src/routes/config.ts`
+2. Customize `src/routes/config.js`
 3. Customize `static/favicon.png`, `static/profileImage.png`, `static/wideBackgroundImage.png`
 4. Get API KEY from notion [Notion docs / Create your integration in Notion](https://developers.notion.com/docs/create-a-notion-integration#create-your-integration-in-notion)
 5. Duplicate this [Notion Template](https://morethanmin.notion.site/12c38b5f459d4eb9a759f92fba6cea36?v=2e7962408e3842b2a1a801bf3546edda)

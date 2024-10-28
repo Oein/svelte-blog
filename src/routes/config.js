@@ -1,34 +1,7 @@
-type TProject = {
-  name: string;
-  url: string;
-};
-
-type TLink = {
-  name: string;
-  url: string;
-  iconSVG: string;
-};
-
-type TConfig = {
-  blogName: string;
-
-  name: string;
-  bio: string;
-
-  profileImageURL: string;
-  bannerImageURL: string;
-
-  projects: TProject[];
-
-  social: {
-    github?: string;
-    x?: string;
-  };
-
-  links: TLink[];
-};
-
-export const config: TConfig = {
+/**
+ * @type {import("./config").TConfig}
+ */
+export const config = {
   blogName: "Oein's Story",
 
   name: "박오인",
@@ -65,4 +38,8 @@ export const config: TConfig = {
         >`,
     },
   ],
+
+  api: {
+    POSTS_PER_PAGE: 20,
+  },
 };
