@@ -1,7 +1,7 @@
 {
-  "name": "jsonts-test",
-  "version": "0.0.1",
-  "private": true,
+  "name": "svelte-blog",
+  "version": "1.0.1",
+  "private": false,
   "scripts": {
     "dev": "GT=\"$(date)\" vite dev",
     "build": "GT=\"$(date)\" vite build",
