@@ -39,7 +39,7 @@
 <svelte:window bind:scrollY />
 
 <svelte:head>
-  <title>Oein's Story</title>
+  <title>{config.blogName}</title>
 </svelte:head>
 
 <Header />

@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import Post from "./components/Post.svelte";
   import SkeletonPost from "./components/SkeletonPost.svelte";
+  import { config } from "./config";
 
   type TPost = {
     slug: string;
@@ -55,7 +56,7 @@
 </script>
 
 <svelte:head>
-  <title>Oein's Story</title>
+  <title>{config.blogName}</title>
 </svelte:head>
 
 <div class="posts">
