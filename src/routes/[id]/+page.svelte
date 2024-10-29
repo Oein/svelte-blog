@@ -4,6 +4,7 @@
 
   import { Utterances, utterancesTheme } from "@codewithshin/svelte-utterances";
   import { onMount } from "svelte";
+  import File from "./File.svelte";
 
   onMount(() => {
     utterancesTheme.set("dark-blue");
@@ -99,7 +100,12 @@
     />
   {/if}
 
-  <Notion blocks={data.data.blocks} />
+  <Notion
+    blocks={data.data.blocks}
+    customRenderer={{
+      file: File,
+    }}
+  />
 
   <!-- @ts-ignore -->
   <Utterances reponame="Oein/svelte-blog" theme="dark-blue" />

@@ -89,6 +89,8 @@ for (let i = 0; i < idxes; i++) {
   paths.push(`/api/posts/${i + 1}.json`);
 }
 
+if (process.env.STATIC === "true") paths.push("/api/files");
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // Consult https://kit.svelte.dev/docs/integrations#preprocessors
