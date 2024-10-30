@@ -3,12 +3,14 @@
   import Post from "./components/Post.svelte";
   import SkeletonPost from "./components/SkeletonPost.svelte";
   import { config } from "./config";
+  import { disassemble } from "es-hangul";
 
   type TPost = {
     slug: string;
     title: string;
     date: string;
     category: string;
+    search: string;
   };
 
   let posts: TPost[] = [];
@@ -16,15 +18,25 @@
   let lastFetched = 0;
   let hasMore = true;
 
+  let sechkwd: string = "";
+
   let infscroll: HTMLDivElement;
 
   async function fetchPosts() {
     if (loading) return;
     loading = true;
     lastFetched++;
+    const mapper = (p: any) => {
+      return {
+        ...p,
+        search: disassemble(p.title).replace(/\s/g, ""),
+      };
+    };
     if (typeof (window as any).postCache[lastFetched] != "undefined") {
       console.log("cache hit", lastFetched);
-      posts = [...posts, ...(window as any).postCache[lastFetched]];
+      posts = [...posts, ...(window as any).postCache[lastFetched].map(mapper)];
+
+      console.log(posts);
       hasMore = true;
       loading = false;
       lastFetched++;
@@ -32,8 +44,8 @@
     }
     const response = await fetch("/api/posts/" + lastFetched + ".json");
     const res = await response.json();
-    (window as any).postCache[lastFetched] = res.posts;
-    posts = [...posts, ...res.posts];
+    (window as any).postCache[lastFetched] = res.posts.map(mapper);
+    posts = [...posts, ...res.posts.map(mapper)];
     hasMore = res.hasMore;
     loading = false;
   }
@@ -53,6 +65,9 @@
       observer.unobserve(infscroll);
     };
   });
+
+  let sck = "";
+  $: sck = disassemble(sechkwd).replace(/\s/g, "");
 </script>
 
 <svelte:head>
@@ -60,7 +75,11 @@
 </svelte:head>
 
 <div class="posts">
-  {#each posts as post}
+  <input bind:value={sechkwd} class="schkwd" placeholder="검색어" />
+
+  {#each posts.filter((x) => {
+    return x.search.includes(sck);
+  }) as post}
     <Post page={post} />
   {/each}
   {#if loading}
@@ -81,9 +100,25 @@
     gap: 1rem;
   }
 
+  .schkwd {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: var(--color-bg-layer2);
+    outline: none;
+    color: var(--color-fg);
+    border: none;
+    font-size: 16px;
+
+    border-radius: 0.5rem;
+  }
+
   @media (max-width: 700px) {
     .posts {
       gap: 0px;
+    }
+
+    .schkwd {
+      border-radius: none;
     }
   }
 </style>
