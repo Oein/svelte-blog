@@ -89,7 +89,10 @@ for (let i = 0; i < idxes; i++) {
   paths.push(`/api/posts/${i + 1}.json`);
 }
 
-if (process.env.STATIC === "true") paths.push("/api/files");
+if (process.env.STATIC === "true") {
+  paths.push("/api/files");
+  paths.push("/api/rebuild");
+}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

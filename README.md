@@ -11,12 +11,11 @@
 7. Link your database to your api [Notoin docs / give your integration page permissions](https://developers.notion.com/docs/create-a-notion-integration#give-your-integration-page-permissions)
 8. Get KV API Code from [https://keyvalue.immanuel.co/api/KeyVal/GetAppKey](https://keyvalue.immanuel.co/api/KeyVal/GetAppKey)
 9. Set env `KVCode` to [Step 8]
-10. Setup env key (NOTION_DB_ID, NOTION_API_KEY)
+10. Set env key (`NOTION_DB_ID`, `NOTION_API_KEY`)
 11. Set env `IS_VERCEL` to `true`
 12. Deploy this repo
 13. Get Deploy Hooks URL from vercel
 
     Vercel > Your Poject > Settings > Git > Deploy Hooks
 
-14. Go to Repo > Settings > Secrets and variables > Actions > Variables
-15. Add VERCEL_WEBHOOK_URL as `Step 13`
+14. Set `BUILD_HOOK` to `Deploy Hook URL` at vercel project's env
