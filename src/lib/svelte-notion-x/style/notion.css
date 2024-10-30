@@ -1,0 +1,32 @@
+:root {
+  --notion-fore-default: rgba(55, 53, 47, 1);
+  --notion-fore-gray: rgba(120, 119, 116, 1);
+  --notion-fore-brown: rgba(159, 107, 83, 1);
+  --notion-fore-orange: rgba(217, 115, 13, 1);
+  --notion-fore-yellow: rgba(203, 145, 47, 1);
+  --notion-fore-green: rgba(68, 131, 97, 1);
+  --notion-fore-blue: rgba(51, 126, 169, 1);
+  --notion-fore-purple: rgba(144, 101, 176, 1);
+  --notion-fore-pink: rgba(193, 76, 138, 1);
+  --notion-fore-red: rgba(212, 76, 71, 1);
+
+  --notion-back-gray: rgba(241, 241, 239, 1);
+  --notion-back-brown: rgba(244, 238, 238, 1);
+  --notion-back-orange: rgba(251, 236, 221, 1);
+  --notion-back-yellow: rgba(251, 243, 219, 1);
+  --notion-back-green: rgba(237, 243, 236, 1);
+  --notion-back-blue: rgba(231, 243, 248, 1);
+  --notion-back-purple: rgba(244, 240, 247, 0.8);
+  --notion-back-pink: rgba(249, 238, 243, 0.8);
+  --notion-back-red: rgba(253, 235, 236, 1);
+
+  --notion-default-font-size: 16px;
+}
+
+.notion-render {
+  box-sizing: border-box;
+  outline: 0;
+
+  scrollbar-width: 15px;
+  scrollbar-color: #d3d1cb rgba(0, 0, 0, 0);
+}

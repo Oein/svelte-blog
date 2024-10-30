@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: import("./$types").PageData;
-  import Notion from "svelte-notion-x";
+  import Notion from "./../../lib/svelte-notion-x/Notion.svelte";
 
   import { Utterances, utterancesTheme } from "@codewithshin/svelte-utterances";
   import { onMount } from "svelte";
@@ -11,6 +11,7 @@
 
     if (typeof window == "undefined") return;
 
+    let trie = 0;
     let inter = setInterval(() => {
       try {
         /** @type {HTMLIFrameElement}*/
@@ -20,6 +21,10 @@
             { type: "set-theme", theme: "dark-blue" },
             "https://utteranc.es"
           );
+        }
+        trie++;
+        if (trie > 10) {
+          clearInterval(inter);
         }
       } catch (e) {
         // iFrame is not loaded yet!
