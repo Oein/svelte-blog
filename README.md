@@ -6,7 +6,7 @@
 2. Customize `src/routes/config.js`
 3. Customize `static/favicon.png`, `static/profileImage.png`, `static/wideBackgroundImage.png`
 4. Get API KEY from notion [Notion docs / Create your integration in Notion](https://developers.notion.com/docs/create-a-notion-integration#create-your-integration-in-notion)
-5. Duplicate this [Notion Template](https://morethanmin.notion.site/12c38b5f459d4eb9a759f92fba6cea36?v=2e7962408e3842b2a1a801bf3546edda)
+5. Duplicate this [Notion Template](https://oein.notion.site/12f065b0f5e6804397caed565eafeeb3)
 6. !! Create A page that has `about` slug, and `public` status
 7. Link your database to your api [Notoin docs / give your integration page permissions](https://developers.notion.com/docs/create-a-notion-integration#give-your-integration-page-permissions)
 8. Get KV API Code from [https://keyvalue.immanuel.co/api/KeyVal/GetAppKey](https://keyvalue.immanuel.co/api/KeyVal/GetAppKey)
