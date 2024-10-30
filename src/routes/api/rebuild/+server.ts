@@ -15,13 +15,13 @@ export const GET: RequestHandler = async ({ url }) => {
     return json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const dbi = process.env.NOTION_DATABASE_ID;
+  const dbi = process.env.NOTION_DB_ID;
   if (!dbi) return json({ error: "No database id provided" });
   const bdh = process.env.BUILD_HOOK;
   if (!bdh) return json({ error: "No build hook provided" });
 
   const notion = new Client({
-    auth: process.env.NOTION_TOKEN,
+    auth: process.env.NOTION_API_KEY,
   });
 
   const response = (
