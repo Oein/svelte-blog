@@ -21,6 +21,7 @@
   let sechkwd: string = "";
 
   let infscroll: HTMLDivElement;
+  let infscrollShown = false;
 
   async function fetchPosts() {
     if (loading) return;
@@ -47,7 +48,9 @@
     (window as any).postCache[lastFetched] = res.posts.map(mapper);
     posts = [...posts, ...res.posts.map(mapper)];
     hasMore = res.hasMore;
-    loading = false;
+    if (infscrollShown && hasMore) {
+      fetchPosts();
+    } else loading = false;
   }
 
   onMount(() => {
@@ -55,6 +58,7 @@
     (window as any).postCache = {};
     fetchPosts();
     const observer = new IntersectionObserver((entries) => {
+      infscrollShown = entries[0].isIntersecting;
       if (entries[0].isIntersecting && hasMore) {
         fetchPosts();
       }
