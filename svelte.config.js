@@ -5,6 +5,8 @@ import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import { writeFile, mkdir, readFile } from "node:fs/promises";
 import { existsSync } from "fs";
 
+import axios from "axios";
+
 import "dotenv/config";
 
 // Fetch pages from API
