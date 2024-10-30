@@ -63,6 +63,9 @@ if (typeof CONFIG_READTIME == "undefined") {
 
     const pgs = pages.filter((page) => page.object == "page");
 
+    let latestF = 0;
+    let latestSTR = "";
+
     // fetch record map
     for (let i = 0; i < pgs.length; i++) {
       console.log("Fetching page", i + 1, "of", pgs.length);
@@ -72,10 +75,25 @@ if (typeof CONFIG_READTIME == "undefined") {
         const hash = crypto.createHash("md5").update(btoa(slug)).digest("hex");
         const recordMap = await getSpecificPage(page.id);
         await writeFile(`./.build/${hash}.json`, JSON.stringify(recordMap));
+        const led = pgs[i].last_edited_time;
+        if (typeof led == "string") {
+          const ledF = Date.parse(led);
+          if (ledF > latestF) {
+            latestF = ledF;
+            latestSTR = led;
+          }
+        }
       } catch (e) {
         console.error("Error fetching page", page.id, e);
       }
     }
+
+    console.log("Latest edit time", latestSTR);
+    await axios.post(
+      `https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${
+        process.env.KVCode
+      }/LET/${latestSTR == "" ? "" : btoa(latestSTR)}`
+    );
   }
 }
 

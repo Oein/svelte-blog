@@ -52,8 +52,8 @@ export const GET: RequestHandler = async ({ url }) => {
   } catch (e) {}
 
   await axios.get(bdh);
-  await axios.get(
-    `https://keyvalue.immanuel.co/api/KeyVal/SetValue/${
+  await axios.post(
+    `https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${
       process.env.KVCode
     }/LET/${btoa(lastEdited)}`
   );
