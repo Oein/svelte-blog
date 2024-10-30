@@ -1,0 +1,16 @@
+name: Fetch Latest Data
+
+on:
+  schedule:
+    - cron: "0 0,12 * * *"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Send VERCEL Build Trigger
+        env:
+          VERCEL_WEBHOOK_URL: ${{secrets.VERCEL_WEBHOOK_URL}}
+        run: curl "$VERCEL_WEBHOOK_URL"

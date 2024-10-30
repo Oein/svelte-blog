@@ -13,9 +13,11 @@
 9. Set env `KVCode` to [Step 8]
 10. Set env key (`NOTION_DB_ID`, `NOTION_API_KEY`)
 11. Set env `IS_VERCEL` to `true`
-12. Deploy this repo
-13. Get Deploy Hooks URL from vercel
+12. Set env `AUTH` to random chars(recommend to use lowercase, uppercase, numbers only!)
+13. Deploy this repo
+14. Get Deploy Hooks URL from vercel
 
     Vercel > Your Poject > Settings > Git > Deploy Hooks
 
-14. Set `BUILD_HOOK` to `Deploy Hook URL` at vercel project's env
+15. Set `BUILD_HOOK` to `Deploy Hook URL` at vercel project's env
+16. At Repo > Settings > Secrets and variables > Actions > Variables, Set `VERCEL_WEBHOOK_URL` to `https://your-blog-domain.com/api/rebuild?auth=AUTH_KEY_YOU_SET_FROM_STEP_12`

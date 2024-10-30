@@ -3,10 +3,14 @@ import type { RequestHandler } from "@sveltejs/kit";
 import { Client } from "@notionhq/client";
 import axios from "axios";
 
-export const GET: RequestHandler = async ({ request: req }) => {
+export const GET: RequestHandler = async ({ url }) => {
   if (process.env.STATIC === "true") return json({ error: "Static site" });
+  const auth = url.searchParams.get("auth");
+
   if (
-    req.headers.get("Authorization") !== `Bearer ${process.env.CRON_SECRET}`
+    !auth ||
+    typeof process.env.AUTH !== "string" ||
+    auth !== process.env.AUTH
   ) {
     return json({ error: "Unauthorized" }, { status: 401 });
   }
