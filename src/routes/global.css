@@ -28,7 +28,7 @@
   color: #000;
 }
 
-.notion-render.notion-link {
+.notion-link {
   word-break: break-all;
 
   background: rgba(120, 131, 135, 0.15);
@@ -39,8 +39,30 @@
   border-radius: 0.2em;
 }
 
-.notion-render.notion-link > * {
+.notion-link > * {
   color: inherit !important;
+}
+
+.notion-callout {
+  background: var(--color-accent-1-hover) !important;
+}
+
+.notion-equation-block:hover {
+  background: var(--color-accent-1-hover) !important;
+}
+
+.notion-table {
+  min-width: max-content;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.notion-table-cell-wrp {
+  min-width: max-content;
+}
+
+.notion-content:has(.notion-table) {
+  overflow-x: auto;
 }
 
 body {
