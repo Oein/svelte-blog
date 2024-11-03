@@ -59,7 +59,15 @@ if (typeof CONFIG_READTIME == "undefined") {
             : "Uncategorized",
       };
     });
+
+    const schplus = pages.map((x) => {
+      return {
+        slug: x.properties.slug.rich_text[0].plain_text,
+        id: x.id.replace(/-/g, ""),
+      };
+    });
     await writeFile("./.build/search.json", JSON.stringify(sch));
+    await writeFile("./.build/searchplus.json", JSON.stringify(schplus));
 
     console.log("Got", pages.length, "pages");
 
@@ -103,6 +111,13 @@ const pages = existsSync("./.build/search.json")
   ? JSON.parse(await readFile("./.build/search.json", "utf-8"))
   : [];
 let paths = pages.map((page) => "/" + page.slug);
+
+const redipaths = existsSync("./.build/searchplus.json")
+  ? JSON.parse(await readFile("./.build/searchplus.json", "utf-8"))
+  : [];
+
+paths = paths.concat(redipaths.map((page) => "/api/slug/" + page.id));
+
 import { config as cfg } from "./src/routes/config.js";
 let idxes = Math.ceil(pages.length / cfg.api.POSTS_PER_PAGE);
 for (let i = 0; i < idxes; i++) {

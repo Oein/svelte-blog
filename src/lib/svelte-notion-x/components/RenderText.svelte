@@ -1,5 +1,6 @@
 <script lang="ts">
   import lazyML from "../lazy/mathml";
+  import BlogLink from "./RenderText/BlogLink.svelte";
   import HandleAnnotation from "./RenderText/HandleAnnotation.svelte";
 
   export let block: {
@@ -42,12 +43,21 @@
           new URL(text.plain_text).pathname}
       />
     </a>
+  {:else if text.type == "mention" && text.mention.type == "page" && text.href.startsWith("https://www.notion.so/")}
+    <BlogLink
+      {text}
+      lan={block.rich_text[i - 1]?.annotations}
+      nan={block.rich_text[i + 1]?.annotations}
+    />
   {:else if text.type == "equation"}
     {#await lazyML then { default: LazyComponent }}
       <LazyComponent tex={text.equation.expression} />
     {/await}
   {:else}
-    <span class="notion-render">{text.plain_text}</span>
+    <span
+      class="notion-render notion-rich-text-not-handled"
+      data-body={JSON.stringify(text)}>{text.plain_text}</span
+    >
   {/if}
 {/each}
 
