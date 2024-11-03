@@ -116,7 +116,7 @@ const redipaths = existsSync("./.build/searchplus.json")
   ? JSON.parse(await readFile("./.build/searchplus.json", "utf-8"))
   : [];
 
-paths = paths.concat(redipaths.map((page) => "/api/slug/" + page.id));
+paths = paths.concat(redipaths.map((page) => "/api/slug/" + page.id + ".txt"));
 
 import { config as cfg } from "./src/routes/config.js";
 let idxes = Math.ceil(pages.length / cfg.api.POSTS_PER_PAGE);
