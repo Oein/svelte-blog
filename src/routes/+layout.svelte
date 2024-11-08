@@ -4,6 +4,7 @@
   import "svelte-notion-x/dist/style/notion.css";
   import "./global.css";
   import { config } from "./config";
+  import { afterNavigate } from "$app/navigation";
   let scrollY = 0;
   let imageHeight = 0;
 
@@ -33,6 +34,16 @@
       },
     };
   }
+
+  afterNavigate((d) => {
+    const pth = d.to?.url;
+    if (pth && (window as any).gtag) {
+      (window as any).gtag("config", config.api.GTAG_ID, {
+        page_path: pth.pathname,
+      });
+      // console.log("gtag", pth.pathname);
+    }
+  });
 </script>
 
 <svelte:window bind:scrollY />
@@ -51,14 +62,12 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("consent", "default", {
-        ad_storage: "denied",
-        analytics_storage: "denied",
-        ad_personalization: "denied",
-        ad_user_data: "denied",
-      });
       gtag("js", new Date());
       gtag("config", config.api.GTAG_ID);
+      gtag("config", config.api.GTAG_ID, {
+        page_path: window.location.pathname,
+      });
+      window.gtag = gtag;
     </script>
   {/if}
 </svelte:head>
