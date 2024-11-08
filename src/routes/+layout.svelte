@@ -4,7 +4,6 @@
   import "svelte-notion-x/dist/style/notion.css";
   import "./global.css";
   import { config } from "./config";
-
   let scrollY = 0;
   let imageHeight = 0;
 
@@ -40,6 +39,28 @@
 
 <svelte:head>
   <title>{config.blogName}</title>
+  {#if config.api.GTAG_ID}
+    <script
+      async
+      src={"https://www.googletagmanager.com/gtag/js?id=" + config.api.GTAG_ID}
+    >
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        ad_personalization: "denied",
+        ad_user_data: "denied",
+      });
+      gtag("js", new Date());
+      gtag("config", config.api.GTAG_ID);
+    </script>
+  {/if}
 </svelte:head>
 
 <Header />

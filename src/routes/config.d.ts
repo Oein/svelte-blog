@@ -29,6 +29,8 @@ export type TConfig = {
 
   api: {
     POSTS_PER_PAGE: number;
+
+    GTAG_ID?: string;
   };
 };
 
