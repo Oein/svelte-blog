@@ -5,7 +5,7 @@
     [key: string]: any;
   };
   const toNotionImageUrl = (url: string, blockId: string) =>
-    `https://notion.so${
+    `/api/image${
       url.startsWith("/image")
         ? url
         : `/image/${encodeURIComponent(url)}?table=block&id=${blockId}`
