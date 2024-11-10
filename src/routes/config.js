@@ -7,8 +7,8 @@ export const config = {
   name: "박오인",
   bio: "개발자가 되고 싶은 영원한 잼민이",
 
-  profileImageURL: "/profileImage.png",
-  bannerImageURL: "/wideBackgroundImage.png",
+  profileImageURL: "/profileImage.webp",
+  bannerImageURL: "/wideBackgroundImage.webp",
 
   projects: [
     {
