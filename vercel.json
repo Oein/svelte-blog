@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/image/:path*",
-      "destination": "https://notion.so/:path*"
-    }
-  ]
-}
