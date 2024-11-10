@@ -45,7 +45,7 @@
         .filter((x) => !!x)
         .map((x) => btoa(x!));
       console.log(arr);
-      const ur = "/image/" + arr.join("/") + "/image.png";
+      const ur = "/image/" + arr.join("/") + "/image.webp";
 
       return ur;
     }

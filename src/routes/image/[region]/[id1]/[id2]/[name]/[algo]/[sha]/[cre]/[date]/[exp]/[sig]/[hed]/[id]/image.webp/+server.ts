@@ -1,6 +1,7 @@
 import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "@sveltejs/kit";
 import axios from "axios";
+import sharp from "sharp";
 
 export const GET: RequestHandler = async ({ params }) => {
   const { region, id1, id2, name, algo, sha, cre, date, exp, sig, hed, id } =
@@ -41,9 +42,17 @@ export const GET: RequestHandler = async ({ params }) => {
     const response = await axios.get(AMZURL, {
       responseType: "arraybuffer",
     });
-    return new Response(response.data, {
+    const buffer = Buffer.from(response.data, "binary");
+    // to webp
+    const webp = await sharp(buffer)
+      .webp({
+        quality: 90,
+        alphaQuality: 90,
+      })
+      .toBuffer();
+    return new Response(webp, {
       headers: {
-        "Content-Type": response.headers["content-type"],
+        "Content-Type": "image/webp",
         "Content-Length": response.headers["content-length"],
       },
     });
