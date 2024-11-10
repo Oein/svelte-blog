@@ -41,12 +41,11 @@
         sp.get("X-Amz-Signature"),
         sp.get("X-Amz-SignedHeaders"),
         sp.get("x-id"),
-        "image.png",
       ]
         .filter((x) => !!x)
         .map((x) => btoa(x!));
       console.log(arr);
-      const ur = "/image/" + arr.join("/");
+      const ur = "/image/" + arr.join("/") + "/image.png";
 
       return ur;
     }
