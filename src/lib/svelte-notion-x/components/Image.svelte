@@ -41,6 +41,7 @@
         sp.get("X-Amz-Signature"),
         sp.get("X-Amz-SignedHeaders"),
         sp.get("x-id"),
+        "image.png",
       ]
         .filter((x) => !!x)
         .map((x) => btoa(x!));

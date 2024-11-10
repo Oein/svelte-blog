@@ -30,8 +30,10 @@
   </button>
   <div class="notion-toggle-content notion-render">
     <RenderText block={block.toggle} />
-    {#if block.children && open}
-      <Notion blocks={block.children} {customRenderer} />
+    {#if block.children}
+      <div style={`display: ${open ? "block" : "none"}`}>
+        <Notion blocks={block.children} {customRenderer} />
+      </div>
     {/if}
   </div>
 </div>
