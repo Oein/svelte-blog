@@ -18,10 +18,10 @@
       return url;
     }
 
-    if (
-      url.startsWith("https://prod-files-secure.") &&
-      url.includes(".amazonaws.com/")
-    ) {
+    console.log("IMGSO", url);
+
+    if (url.startsWith("https://prod-files-secure.")) {
+      console.log("IMGSO0");
       const u = new URL(url);
       const urlspli = u.pathname.split("/");
       const region = u.hostname

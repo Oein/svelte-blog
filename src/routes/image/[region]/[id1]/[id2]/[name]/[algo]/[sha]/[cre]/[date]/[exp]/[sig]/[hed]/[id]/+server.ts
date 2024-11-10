@@ -38,8 +38,15 @@ export const GET: RequestHandler = async ({ params }) => {
 
   try {
     console.log(AMZURL);
-    const response = await axios.get(AMZURL);
-    return response.data;
+    const response = await axios.get(AMZURL, {
+      responseType: "arraybuffer",
+    });
+    return new Response(response.data, {
+      headers: {
+        "Content-Type": response.headers["content-type"],
+        "Content-Length": response.headers["content-length"],
+      },
+    });
   } catch (e) {}
 
   return json({ error: "Not implemented" });
