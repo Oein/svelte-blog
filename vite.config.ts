@@ -10,6 +10,7 @@ export default defineConfig({
         quality: 90,
         alphaQuality: 90,
       },
+      destinationFolder: "build",
     }),
   ],
 });
