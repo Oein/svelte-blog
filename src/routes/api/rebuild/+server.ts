@@ -47,11 +47,7 @@ export const GET: RequestHandler = async ({ url }) => {
   );
 
   try {
-    if (
-      led.data != "" &&
-      atob(led.data) == lastEdited &&
-      new Date().getHours() != 5 // force build at 5am to prevent image expiry
-    )
+    if (led.data != "" && atob(led.data) == lastEdited)
       return json({ error: "No changes" });
   } catch (e) {}
 
