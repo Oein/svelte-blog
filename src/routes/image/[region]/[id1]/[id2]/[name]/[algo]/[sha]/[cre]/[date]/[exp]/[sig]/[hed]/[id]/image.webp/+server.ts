@@ -56,7 +56,9 @@ export const GET: RequestHandler = async ({ params }) => {
         "Content-Length": response.headers["content-length"],
       },
     });
-  } catch (e) {}
+  } catch (e) {
+    console.error("Error fetching that image", e);
+  }
 
   return json({ error: "Not implemented" });
 };
