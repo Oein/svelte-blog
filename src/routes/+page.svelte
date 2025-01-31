@@ -27,6 +27,7 @@
     if (loading) return;
     loading = true;
     lastFetched++;
+
     const mapper = (p: any) => {
       return {
         ...p,
@@ -43,14 +44,31 @@
       lastFetched++;
       return;
     }
-    const response = await fetch("/api/posts/" + lastFetched + ".json");
-    const res = await response.json();
+    const tryResponse = async () => {
+      let tried = 0;
+      try {
+        const response = await fetch("/api/posts/" + lastFetched + ".json");
+        const res = await response.json();
+        return res;
+      } catch (e) {
+        if (tried < 3) {
+          tried++;
+          return tryResponse();
+        }
+        throw e;
+      }
+    };
+    const res = await tryResponse();
     (window as any).postCache[lastFetched] = res.posts.map(mapper);
     posts = [...posts, ...res.posts.map(mapper)];
     hasMore = res.hasMore;
+
+    loading = false;
+
     if (infscrollShown && hasMore) {
+      infscrollShown = false;
       fetchPosts();
-    } else loading = false;
+    }
   }
 
   onMount(() => {
@@ -58,7 +76,7 @@
     (window as any).postCache = {};
     fetchPosts();
     const observer = new IntersectionObserver((entries) => {
-      infscrollShown = entries[0].isIntersecting;
+      infscrollShown = infscrollShown || entries[0].isIntersecting;
       if (entries[0].isIntersecting && hasMore) {
         fetchPosts();
       }
