@@ -87,6 +87,13 @@
     text-decoration: none;
 
     transition: color 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .title:hover {
