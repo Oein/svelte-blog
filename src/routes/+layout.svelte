@@ -5,6 +5,7 @@
   import "./global.css";
   import { config } from "./config";
   import { afterNavigate } from "$app/navigation";
+  import { onMount } from "svelte";
   let scrollY = 0;
   let imageHeight = 0;
 
@@ -44,6 +45,12 @@
       // console.log("gtag", pth.pathname);
     }
   });
+
+  onMount(() => {
+    if (typeof window != "undefined") {
+      (window as any).config = config;
+    }
+  });
 </script>
 
 <svelte:window bind:scrollY />
@@ -57,17 +64,25 @@
     >
     </script>
     <script>
-      window.dataLayer = window.dataLayer || [];
+      const e = () => {
+        if (typeof window.config == "undefined") {
+          console.log("waiting for config");
+          setTimeout(e, 100);
+          return;
+        }
+        window.dataLayer = window.dataLayer || [];
 
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", config.api.GTAG_ID);
-      gtag("config", config.api.GTAG_ID, {
-        page_path: window.location.pathname,
-      });
-      window.gtag = gtag;
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", window.config.api.GTAG_ID);
+        gtag("config", window.config.api.GTAG_ID, {
+          page_path: window.location.pathname,
+        });
+        window.gtag = gtag;
+      };
+      e();
     </script>
   {/if}
 </svelte:head>
