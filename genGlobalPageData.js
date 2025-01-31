@@ -66,11 +66,25 @@ export async function listPages(
   cursor = undefined,
   page_size = 10
 ) {
-  const query = structuredClone(database.query);
-  query.page_size = page_size;
-  query.start_cursor = cursor ?? undefined;
+  let tried = 0;
+  while (true) {
+    try {
+      await rateWait();
+      const query = structuredClone(database.query);
+      query.page_size = page_size;
+      query.start_cursor = cursor ?? undefined;
 
-  return await client.databases.query(query);
+      const res = await client.databases.query(query);
+      return res;
+    } catch (e) {
+      tried++;
+      console.error(`Failed to fetch pages, retrying... ${tried}`);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (tried > 3) {
+        throw e;
+      }
+    }
+  }
 }
 
 import { Client } from "@notionhq/client";
@@ -124,7 +138,19 @@ export const getGlobalPageData = async () => {
  * @returns
  */
 export const getSpecificPage = async (id) => {
-  await rateWait();
-  const pg = await page(client, id);
-  return pg;
+  let tried = 0;
+  while (true) {
+    try {
+      await rateWait();
+      const pg = await page(client, id);
+      return pg;
+    } catch (e) {
+      tried++;
+      console.error(`Failed to fetch page ${id}, retrying... ${tried}`);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (tried > 3) {
+        throw e;
+      }
+    }
+  }
 };
