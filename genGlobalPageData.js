@@ -75,6 +75,7 @@ export async function listPages(
       query.start_cursor = cursor ?? undefined;
 
       const res = await client.databases.query(query);
+      // console.log("Fetched", res.results, "pages");
       return res;
     } catch (e) {
       tried++;
@@ -120,12 +121,11 @@ export const getGlobalPageData = async () => {
   let pages = [];
 
   while (true) {
-    console.log("Fetching pages from NOTION", cursor);
+    console.log("Fetching pages from NOTION ( cursor:", cursor, ")");
     await rateWait();
     const result = await listPages(client, BlockDatabase, cursor);
     pages = [...pages, ...result.results];
     if (result.has_more) {
-      // console.log("Fetching more pages from NOTION", result);
       cursor = result.next_cursor;
     } else break;
   }

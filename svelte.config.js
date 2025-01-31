@@ -48,8 +48,8 @@ if (typeof CONFIG_READTIME == "undefined") {
     await writeFile("./.build/pages.json", JSON.stringify(pages));
     const sch = pages.map((x) => {
       return {
-        slug: x.properties.slug.rich_text[0].plain_text,
-        title: x.properties.title.title[0].plain_text,
+        slug: x.properties.slug.rich_text.map((x) => x.plain_text).join(""),
+        title: x.properties.title.title.map((x) => x.plain_text).join(""),
         date: x.properties.date.date.start,
         category:
           "select" in x.properties.category &&
