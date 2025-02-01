@@ -120,7 +120,7 @@ const fetchPagesList = async () => {
 const CONFIG_READTIME = process.env.GT;
 if (typeof CONFIG_READTIME == "undefined")
   console.warn("CONFIG_READTIME(process.env.GT) is not defined");
-else fetchPagesList();
+else await fetchPagesList();
 
 // MARK: - Blog post paths
 
