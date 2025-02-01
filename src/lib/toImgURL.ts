@@ -20,29 +20,8 @@ const defaultMapImageUrl = (
   if (url.startsWith("https://prod-files-secure.")) {
     console.log("IMGSO0");
     const u = new URL(url);
-    const urlspli = u.pathname.split("/");
-    const region = u.hostname
-      .replace("prod-files-secure.s3.", "")
-      .replace(".amazonaws.com", "");
     const sp = u.searchParams;
-    const arr = [
-      region,
-      urlspli[1],
-      urlspli[2],
-      urlspli[3],
-      sp.get("X-Amz-Algorithm"),
-      sp.get("X-Amz-Content-Sha256"),
-      sp.get("X-Amz-Credential"),
-      sp.get("X-Amz-Date"),
-      sp.get("X-Amz-Expires"),
-      sp.get("X-Amz-Signature"),
-      sp.get("X-Amz-SignedHeaders"),
-      sp.get("x-id"),
-    ]
-      .filter((x) => !!x)
-      .map((x) => btoa(x!));
-    console.log(arr);
-    const ur = "/image/" + arr.join("/") + "/image.webp";
+    const ur = "/image/" + sp.get("X-Amz-Signature");
 
     return ur;
   }
