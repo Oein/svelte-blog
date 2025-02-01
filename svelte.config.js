@@ -194,6 +194,7 @@ if (process.env.FETCHIMGFALSE !== "true") {
     const urlVal = new URL(url);
     const sign = urlVal.searchParams.get("X-Amz-Signature");
     if (sign == null) continue;
+    if (existsSync(`./.build/${sign}.webp`)) continue;
 
     const response = await axios.get(url, {
       responseType: "arraybuffer",
