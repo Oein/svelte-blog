@@ -41,6 +41,6 @@ export const config = {
 
   api: {
     POSTS_PER_PAGE: 20,
-    GTAG_ID: "441806955",
+    GTAG_ID: "G-9KRZP4YS75",
   },
 };
