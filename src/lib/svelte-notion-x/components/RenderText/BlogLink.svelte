@@ -12,7 +12,7 @@
   onMount(async () => {
     if (typeof window == "undefined") return;
     link = fetch(
-      "/api/slug/" + text.href.replace("https://www.notion.so/", "") + ".txt"
+      "/api/slug/" + text.href.replace("https://www.notion.so/", "")
     ).then((res) => res.text());
   });
 </script>

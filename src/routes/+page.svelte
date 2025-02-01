@@ -47,7 +47,7 @@
     const tryResponse = async () => {
       let tried = 0;
       try {
-        const response = await fetch("/api/posts/" + lastFetched + ".json");
+        const response = await fetch("/api/posts/" + lastFetched);
         const res = await response.json();
         return res;
       } catch (e) {
