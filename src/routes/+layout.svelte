@@ -58,18 +58,17 @@
 <svelte:head>
   <title>{config.blogName}</title>
   {#if config.api.GTAG_ID}
-    <script
-      async
-      src={"https://www.googletagmanager.com/gtag/js?id=" + config.api.GTAG_ID}
-    >
-    </script>
-    <script>
-      const e = () => {
+    <script type="module">
+      const e = async () => {
         if (typeof window.config == "undefined") {
           console.log("waiting for config");
           setTimeout(e, 100);
           return;
         }
+        await import(
+          "https://www.googletagmanager.com/gtag/js?id=" +
+            window.config.api.GTAG_ID
+        );
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
